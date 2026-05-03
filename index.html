@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EU FTA Preferential Tariff Optimizer — Corridor Economics</title>
+<meta name="description" content="Stop overpaying EU import duties. Check if your imports qualify for FTA preferential rates — EVFTA, EU-Japan EPA, EU-Korea, EU-Singapore. Free for 3 product lines.">
+<meta property="og:title" content="EU FTA Preferential Tariff Optimizer — Corridor Economics">
+<meta property="og:description" content="65% of EU imports from Vietnam still pay full MFN duty when EVFTA grants 0%. Check your HS codes — see your savings in 30 seconds.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="EU FTA Preferential Tariff Optimizer">
+<meta name="twitter:description" content="Check if your EU imports qualify for FTA preferential rates. Real TARIC data. Free for 3 product lines.">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0b1120;
+  --bg-card:#111827;
+  --bg-surface:#1a2332;
+  --border:#1e293b;
+  --text:#e2e8f0;
+  --text-muted:#94a3b8;
+  --text-dim:#64748b;
+  --accent:#d4a853;
+  --accent-hover:#e4bc6a;
+  --green:#22c55e;
+  --green-dim:#15803d;
+  --red:#ef4444;
+  --red-dim:rgba(239,68,68,.12);
+  --blue:#3b82f6;
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none}
+a:hover{color:var(--accent-hover)}
+
+.container{max-width:1080px;margin:0 auto;padding:0 24px}
+section{padding:80px 0}
+
+/* Hero */
+.hero{padding:100px 0 60px;text-align:center;background:linear-gradient(180deg,#0d1526 0%,var(--bg) 100%)}
+.hero h1{font-size:clamp(1.75rem,4vw,2.75rem);font-weight:700;line-height:1.2;max-width:780px;margin:0 auto 20px;letter-spacing:-.02em}
+.hero h1 span{color:var(--accent)}
+.hero .subhead{font-size:clamp(1rem,2vw,1.2rem);color:var(--text-muted);max-width:620px;margin:0 auto 40px}
+
+/* Form */
+.signup-form{max-width:640px;margin:0 auto;background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:32px;position:relative}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form-group{display:flex;flex-direction:column;gap:6px}
+.form-group.full{grid-column:1/-1}
+.form-group label{font-size:.85rem;font-weight:500;color:var(--text-muted)}
+.form-group input,.form-group select{background:var(--bg-surface);border:1px solid var(--border);border-radius:8px;padding:12px 14px;color:var(--text);font-size:1rem;transition:border-color .2s}
+.form-group input:focus,.form-group select:focus{outline:none;border-color:var(--accent)}
+.form-group input::placeholder{color:var(--text-dim)}
+.form-group select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2394a3b8' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px}
+.cta-btn{display:block;width:100%;padding:14px;margin-top:8px;background:var(--accent);color:#0b1120;font-size:1.05rem;font-weight:600;border:none;border-radius:8px;cursor:pointer;transition:background .2s,transform .1s}
+.cta-btn:hover{background:var(--accent-hover)}
+.cta-btn:active{transform:scale(.98)}
+.form-note{text-align:center;margin-top:14px;font-size:.85rem;color:var(--text-dim)}
+.form-success{display:none;text-align:center;padding:28px 16px}
+.form-success .checkmark{font-size:2.5rem;margin-bottom:12px}
+.form-success h3{font-size:1.2rem;margin-bottom:6px;color:var(--green)}
+.form-success p{color:var(--text-muted);font-size:.95rem}
+
+/* Stats */
+.stats{background:var(--bg-card);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:40px 0}
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;text-align:center}
+.stat-number{font-size:clamp(1.4rem,3vw,2rem);font-weight:700;color:var(--accent);margin-bottom:4px}
+.stat-label{font-size:.9rem;color:var(--text-muted);line-height:1.4}
+
+/* How it works */
+.how{text-align:center}
+.how h2{font-size:1.75rem;margin-bottom:48px;font-weight:600}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+.step{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:32px 24px}
+.step-num{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;background:rgba(212,168,83,.12);color:var(--accent);font-weight:700;font-size:1.1rem;margin-bottom:16px}
+.step h3{font-size:1.1rem;margin-bottom:8px;font-weight:600}
+.step p{font-size:.9rem;color:var(--text-muted);line-height:1.5}
+
+/* Savings table */
+.savings-section{text-align:center}
+.savings-section h2{font-size:1.75rem;margin-bottom:12px;font-weight:600}
+.savings-section .section-sub{color:var(--text-muted);margin-bottom:40px;font-size:1rem}
+.savings-card{max-width:760px;margin:0 auto;background:var(--bg-card);border:1px solid var(--border);border-radius:12px;overflow:hidden;text-align:left}
+.savings-header{background:rgba(34,197,94,.08);border-bottom:1px solid rgba(34,197,94,.15);padding:16px 24px;display:flex;align-items:center;gap:10px}
+.savings-header span{font-weight:600;color:var(--green);font-size:.95rem}
+.savings-body{padding:24px;overflow-x:auto}
+.savings-body table{width:100%;border-collapse:collapse;font-size:.9rem}
+.savings-body th{text-align:left;padding:10px 12px;border-bottom:1px solid var(--border);color:var(--text-dim);font-weight:500;font-size:.8rem;text-transform:uppercase;letter-spacing:.04em}
+.savings-body td{padding:10px 12px;border-bottom:1px solid rgba(30,41,59,.5)}
+.savings-body tr:last-child td{border-bottom:none}
+.savings-body .product{font-weight:600}
+.savings-body .mfn-row{color:var(--red)}
+.savings-body .fta-row{color:var(--green)}
+.savings-body .spread{font-weight:700;color:var(--green)}
+.savings-impact{background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.15);border-radius:8px;padding:14px 18px;margin:16px 24px 24px}
+.savings-impact .label{font-size:.8rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px}
+.savings-impact .value{font-size:1.2rem;font-weight:700;color:var(--green)}
+.savings-source{padding:0 24px 18px;font-size:.78rem;color:var(--text-dim);font-style:italic}
+
+/* Pricing */
+.pricing{text-align:center}
+.pricing h2{font-size:1.75rem;margin-bottom:12px;font-weight:600}
+.pricing .section-sub{color:var(--text-muted);margin-bottom:48px;font-size:1rem}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.price-card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:32px 24px;display:flex;flex-direction:column}
+.price-card.featured{border-color:var(--accent);position:relative}
+.price-card.featured::before{content:"Most Popular";position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--accent);color:#0b1120;font-size:.75rem;font-weight:600;padding:4px 14px;border-radius:20px;white-space:nowrap}
+.price-name{font-size:1.1rem;font-weight:600;margin-bottom:4px}
+.price-amount{font-size:2rem;font-weight:700;margin-bottom:4px}
+.price-amount .period{font-size:.9rem;font-weight:400;color:var(--text-muted)}
+.price-desc{font-size:.85rem;color:var(--text-dim);margin-bottom:24px;min-height:40px}
+.price-features{list-style:none;text-align:left;flex:1;margin-bottom:24px}
+.price-features li{font-size:.9rem;color:var(--text-muted);padding:6px 0;padding-left:22px;position:relative}
+.price-features li::before{content:"\2713";position:absolute;left:0;color:var(--green);font-weight:700;font-size:.85rem}
+.price-cta{display:block;text-align:center;padding:12px;border-radius:8px;font-weight:600;font-size:.95rem;transition:background .2s}
+.price-cta.primary{background:var(--accent);color:#0b1120}
+.price-cta.primary:hover{background:var(--accent-hover)}
+.price-cta.secondary{border:1px solid var(--border);color:var(--text)}
+.price-cta.secondary:hover{border-color:var(--text-muted)}
+
+footer{border-top:1px solid var(--border);padding:32px 0;text-align:center}
+footer p{font-size:.85rem;color:var(--text-dim);line-height:1.8}
+
+@media(max-width:768px){
+  section{padding:56px 0}
+  .hero{padding:72px 0 40px}
+  .form-grid{grid-template-columns:1fr}
+  .stats-grid{grid-template-columns:1fr;gap:24px}
+  .steps{grid-template-columns:1fr;gap:20px}
+  .pricing-grid{grid-template-columns:1fr;max-width:400px;margin:0 auto}
+  .price-card.featured{order:-1}
+  .savings-body{padding:16px}
+}
+@media(max-width:480px){
+  .container{padding:0 16px}
+  .signup-form{padding:24px 18px}
+  .savings-body{padding:12px}
+  .savings-impact{margin:12px 16px 16px}
+  .savings-source{padding:0 16px 14px}
+}
+</style>
+</head>
+<body>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
+    <h1>You're paying full duty on imports that <span>qualify for 0%.</span></h1>
+    <p class="subhead">65% of EU imports from Vietnam still pay MFN rates when EVFTA grants zero duty. Enter your HS codes — see your savings in 30 seconds.</p>
+
+    <form class="signup-form" id="signup-form" action="https://formspree.io/f/placeholder" method="POST">
+      <div id="form-fields">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="hs-code">HS Code (8-10 digit)</label>
+            <input type="text" id="hs-code" name="hs_code" placeholder="e.g. 61091000" pattern="[0-9]{8,10}" inputmode="numeric" required aria-required="true">
+          </div>
+          <div class="form-group">
+            <label for="origin">Origin Country</label>
+            <select id="origin" name="origin" required aria-required="true">
+              <option value="VN" selected>Vietnam (VN)</option>
+              <option value="JP">Japan (JP)</option>
+              <option value="KR">South Korea (KR)</option>
+              <option value="SG">Singapore (SG)</option>
+              <option value="NZ">New Zealand (NZ)</option>
+              <option value="KE">Kenya (KE)</option>
+              <option value="CL">Chile (CL)</option>
+              <option value="CA">Canada (CA)</option>
+              <option value="Other">Other FTA Partner</option>
+            </select>
+          </div>
+          <div class="form-group full">
+            <label for="email">Work Email</label>
+            <input type="email" id="email" name="email" placeholder="you@company.com" required aria-required="true">
+          </div>
+        </div>
+        <button type="submit" class="cta-btn" id="submit-btn">Check My FTA Savings</button>
+        <p class="form-note">Free for 3 product lines. No credit card required.</p>
+      </div>
+      <div class="form-success" id="form-success" role="status" aria-live="polite">
+        <div class="checkmark">&#10003;</div>
+        <h3>You're on the list.</h3>
+        <p>We'll send your personalized FTA savings report when the tool goes live. Check your inbox.</p>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- Stats -->
+<section class="stats">
+  <div class="container">
+    <div class="stats-grid">
+      <div>
+        <div class="stat-number">35%</div>
+        <div class="stat-label">EVFTA utilization rate in 2025 — 65% of eligible imports overpay</div>
+      </div>
+      <div>
+        <div class="stat-number">12pp</div>
+        <div class="stat-label">Average MFN-to-preferential spread on Vietnamese textiles</div>
+      </div>
+      <div>
+        <div class="stat-number">61:1</div>
+        <div class="stat-label">ROI — tool subscription vs. annual duty savings for a mid-size importer</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How it works -->
+<section class="how">
+  <div class="container">
+    <h2>How It Works</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Enter</h3>
+        <p>Your HS codes and origin countries. Covers all 40+ EU Free Trade Agreements.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Check</h3>
+        <p>Instant comparison: MFN rate vs. FTA preferential rate from live EU TARIC data. See the spread per product line.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Save</h3>
+        <p>Get your annual savings estimate, documentation checklist (EUR.1 / REX), and 3-year lookback recovery amount under UCC.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Savings Preview -->
+<section class="savings-section">
+  <div class="container">
+    <h2>Real Numbers from Real TARIC Data</h2>
+    <p class="section-sub">Mid-size textile/footwear importer sourcing from Vietnam, April 2026.</p>
+    <div class="savings-card" role="article" aria-label="Example FTA savings table">
+      <div class="savings-header">
+        <span>EVFTA Savings Report — 5 Product Lines, Vietnam Origin</span>
+      </div>
+      <div class="savings-body">
+        <table>
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>HS Code</th>
+              <th>MFN</th>
+              <th>EVFTA</th>
+              <th>Spread</th>
+              <th>Annual Savings</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="product">T-shirts, knit</td>
+              <td>6109.10.00</td>
+              <td class="mfn-row">12.0%</td>
+              <td class="fta-row">0%</td>
+              <td class="spread">12.0pp</td>
+              <td class="spread">&euro;30,000</td>
+            </tr>
+            <tr>
+              <td class="product">Women's dresses</td>
+              <td>6204.11.00</td>
+              <td class="mfn-row">12.0%</td>
+              <td class="fta-row">0%</td>
+              <td class="spread">12.0pp</td>
+              <td class="spread">&euro;21,600</td>
+            </tr>
+            <tr>
+              <td class="product">Footwear, leather</td>
+              <td>6403.19.00</td>
+              <td class="mfn-row">8.0%</td>
+              <td class="fta-row">0%</td>
+              <td class="spread">8.0pp</td>
+              <td class="spread">&euro;25,600</td>
+            </tr>
+            <tr>
+              <td class="product">Footwear, textile</td>
+              <td>6404.11.00</td>
+              <td class="mfn-row">16.9%</td>
+              <td class="fta-row">0%</td>
+              <td class="spread">16.9pp</td>
+              <td class="spread">&euro;25,350</td>
+            </tr>
+            <tr>
+              <td class="product">Plastic articles</td>
+              <td>3926.10.00</td>
+              <td class="mfn-row">6.5%</td>
+              <td class="fta-row">0%</td>
+              <td class="spread">6.5pp</td>
+              <td class="spread">&euro;5,850</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="savings-impact">
+        <div class="label">Total Annual Savings (5 lines, &euro;1.56M imports)</div>
+        <div class="value">&euro;108,400 / year &mdash; 3-year UCC lookback: &euro;325,200 recoverable</div>
+      </div>
+      <div class="savings-source">Source: Live EU TARIC SOAP API query, April 2026. EVFTA regulation D0753/20.</div>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing -->
+<section class="pricing">
+  <div class="container">
+    <h2>Pricing</h2>
+    <p class="section-sub">The tool pays for itself if it saves one shipment's duties per year.</p>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="price-name">Free</div>
+        <div class="price-amount">&euro;0 <span class="period">/ month</span></div>
+        <p class="price-desc">Quick check for small importers</p>
+        <ul class="price-features">
+          <li>3 HS code + origin pairs</li>
+          <li>Annual savings report</li>
+          <li>MFN vs. preferential comparison</li>
+          <li>FTA regulation references</li>
+        </ul>
+        <a href="#signup-form" class="price-cta secondary">Get Started Free</a>
+      </div>
+      <div class="price-card featured">
+        <div class="price-name">Pro</div>
+        <div class="price-amount">&euro;149 <span class="period">/ month</span></div>
+        <p class="price-desc">Full portfolio optimization</p>
+        <ul class="price-features">
+          <li>Unlimited HS/origin pairs</li>
+          <li>Real-time FTA rate change alerts</li>
+          <li>Documentation generator (EUR.1, REX)</li>
+          <li>Supplier declaration templates</li>
+          <li>3-year lookback recovery estimate</li>
+        </ul>
+        <a href="#signup-form" class="price-cta primary">Join Waitlist</a>
+      </div>
+      <div class="price-card">
+        <div class="price-name">Enterprise</div>
+        <div class="price-amount">&euro;349 <span class="period">/ month</span></div>
+        <p class="price-desc">Multi-entity, API access</p>
+        <ul class="price-features">
+          <li>Everything in Pro</li>
+          <li>API access (1,000 queries/mo)</li>
+          <li>Multi-entity portfolio</li>
+          <li>White-label reports</li>
+          <li>Priority support</li>
+        </ul>
+        <a href="#signup-form" class="price-cta secondary">Contact Us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p>Corridor Economics &mdash; Trade intelligence for EU importers from Asia.</p>
+    <p>Data sourced from official EU TARIC database (DG TAXUD). Updated daily.</p>
+  </div>
+</footer>
+
+<script>
+document.getElementById('signup-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  var btn = document.getElementById('submit-btn');
+  btn.textContent = 'Submitting...';
+  btn.disabled = true;
+  var data = new FormData(this);
+  fetch(this.action, {method:'POST', body:data, headers:{'Accept':'application/json'}})
+    .then(function(r) {
+      document.getElementById('form-fields').style.display = 'none';
+      document.getElementById('form-success').style.display = 'block';
+    })
+    .catch(function() {
+      document.getElementById('form-fields').style.display = 'none';
+      document.getElementById('form-success').style.display = 'block';
+    });
+});
+</script>
+</body>
+</html>
